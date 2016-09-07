@@ -1,0 +1,9 @@
+{
+  "name": "Device-reader",
+  "version": "1.0.0",
+  "description": "Reads a device status and put in stdout",
+  "dependencies": {
+    "express": "^4.10.2",
+    "socket.io": "^1.4.8"
+  }
+}
