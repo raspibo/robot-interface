@@ -15,19 +15,19 @@
 	<script src ="/socket.io/socket.io.js"></script>
 	<!--<script src ="/jquery"</script>-->
 	<script>
-		var socket = io();
+		var socket = io();					//initialise socket
 		var mp = document.getElementById("mousePad");
 		
 		function getMousePos(canvas,ev){
-			var rect = canvas.getBoundingClientRect();
-			json_list = {};
-			json_list.x = ev.clientX-rect.left;
-			json_list.y = ev.clientY-rect.left;
+			var rect = canvas.getBoundingClientRect();     	//create a rectangle which boundings are the same of the
+			json_list = {};				        //canvas, so we can have the relative position of the
+			json_list.x = Math.round(ev.clientX-rect.left); //mouse inside of it
+			json_list.y = Math.round(ev.clientY-rect.top);
 			json_list = JSON.stringify(json_list);
 			return json_list;
 		}
 		
-		mp.addEventListener('mousemove',function(ev){
+		mp.addEventListener('mousemove',function(ev){		//listen mouse movements
 			var pos = getMousePos(mp,ev);
 			socket.emit('mousePositionChanged',pos);
 		},false);
