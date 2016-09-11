@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html><head><title>Test transmission</title>
+	<style>
+		#statusPad {
+			border: 2px solid black;
+			display: inline-block;
+		}
+		body {
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div id="statusPad" width="200" height="200"></div>
+	<script src ="/socket.io/socket.io.js"></script>
+	<script>
+		var gamepads;
+		var timestamp;
+		var connected = false;
+		function update_gamepads_list() {
+			gamepads = navigator.getGamepads();
+			console.log(gamepads);
+		}
+
+		function pollGamepad() {
+			if (connected) {
+				if (timestamp != gamepads[0].timestamp){
+					console.log("event occurred");
+					timestamp = gamepads[0].timestamp;
+				}
+			}
+			window.requestAnimationFrame(pollGamepad);
+		}
+
+		if(!!navigator.getGamepads){
+			console.log("Gamepad enabled");
+		} else {
+			document.getElementById("statusPad").innerHTML="Joystick/joypad not supported";
+		}
+
+		window.addEventListener("gamepadconnected", function(e){update_gamepads_list();connected=true;});
+		window.addEventListener("gamepaddisconnected", function(e){update_gamepads_list();connected=false;});
+		window.requestAnimationFrame(pollGamepad);
+	</script>
+</body></html>

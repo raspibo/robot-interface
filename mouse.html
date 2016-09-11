@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html><head><title>Test transmission</title>
+	<style>
+		#mousePad {
+			border: 2px solid black;
+			display: inline-block;
+		}
+		body {
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="mousePad" width="500" height="500">Canvas not supported</canvas>
+	<script src ="/socket.io/socket.io.js"></script>
+	<script>
+		var socket = io();					//initialise socket
+		var mp = document.getElementById("mousePad");
+		
+		function getMousePos(canvas,ev){
+			var rect = canvas.getBoundingClientRect();     	//create a rectangle which boundings are the same of the
+			json_list = {};				        //canvas, so we can have the relative position of the
+			json_list.x = Math.round(ev.clientX-rect.left); //mouse inside of it
+			json_list.y = Math.round(ev.clientY-rect.top);
+			json_list = JSON.stringify(json_list);
+			return json_list;
+		}
+		
+		mp.addEventListener('mousemove',function(ev){		//listen mouse movements
+			var pos = getMousePos(mp,ev);
+			socket.emit('mousePositionChanged',pos);
+		},false);
+	</script>
+</body></html>
