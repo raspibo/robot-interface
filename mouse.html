@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html><head><title>Test transmission</title>
+<html><head><title>Mouse control</title>
 	<style>
 		#mousePad {
 			border: 2px solid black;
@@ -22,6 +22,7 @@
 			json_list = {};				        //canvas, so we can have the relative position of the
 			json_list.x = Math.round(ev.clientX-rect.left); //mouse inside of it
 			json_list.y = Math.round(ev.clientY-rect.top);
+			json_list.device = "mouse";
 			json_list = JSON.stringify(json_list);
 			return json_list;
 		}

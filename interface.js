@@ -24,5 +24,11 @@ io.on('connection', function(socket){
 	});
 });
 
+io.on('connection', function(socket){
+	socket.on('joyMoved',function(msg){ //output in stdout
+		console.log(msg);
+	});
+});
+
 http.listen(3000,function(){
 });

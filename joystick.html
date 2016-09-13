@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html><head><title>Test transmission</title>
+<html><head><title>Joy control</title>
 	<style>
 		#statusPad {
 			border: 2px solid black;
@@ -17,16 +17,27 @@
 		var gamepads;
 		var timestamp;
 		var connected = false;
-		function update_gamepads_list() {
+		var socket = io();
+		function update_gamepads_list() {			//get gamepads list
 			gamepads = navigator.getGamepads();
 			console.log(gamepads);
 		}
 
-		function pollGamepad() {
+		function pollGamepad() {				//polls gamepads
 			if (connected) {
-				if (timestamp != gamepads[0].timestamp){
+				if (timestamp != gamepads[0].timestamp){//if timestamps are different, then something happened
 					console.log("event occurred");
 					timestamp = gamepads[0].timestamp;
+					json_list = {};
+					json_list.gamepad_x = gamepads[0].axes[0];
+					json_list.gamepad_y = gamepads[0].axes[1];
+					json_list.button0 = gamepads[0].buttons[0].pressed;
+					json_list.button1 = gamepads[0].buttons[1].pressed;
+					json_list.button2 = gamepads[0].buttons[2].pressed;
+					json_list.button3 = gamepads[0].buttons[3].pressed;
+					json_list.device = "joy";
+					json_list = JSON.stringify(json_list);
+					socket.emit('joyMoved',json_list);
 				}
 			}
 			window.requestAnimationFrame(pollGamepad);
