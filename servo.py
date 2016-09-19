@@ -7,6 +7,9 @@ import sys
 def exit_handler(signal, frame):
 	print('\nExiting...')
 	node_script.terminate()
+	f = open('/dev/servoblaster','w') #turn off servo
+	f.write('0=0\n')
+	f.close()
 	servoblaster_daemon.terminate()
 	sys.exit(0)
 
