@@ -9,3 +9,5 @@ There are two python scripts:
 
 This interface is tested on Firefox 48.0, it should work on webkit browsers as well but at the moment it fails.
 
+To exit press CTRL-C.
+
