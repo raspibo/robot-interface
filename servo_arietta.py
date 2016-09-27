@@ -26,7 +26,7 @@ if __name__ == '__main__':
 			motor_spd = sys.argv[4]
 		except KeyError:
 			print "Invalid pin name\nFormat: J4.xx, PWMs in 34 36 38 40\n"
-			sys.exit(0)
+			sys.exit(1)
 	else:
 		pwm_servo = "J4.34"
 		motor_spd = "J4.36"
