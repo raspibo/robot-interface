@@ -22,6 +22,7 @@ if __name__ == '__main__':
 		print "Servo pin n.22"
 	node_script = subprocess.Popen(["node","interface.js"],stdout=subprocess.PIPE) #launch nodejs
 	servoblaster_daemon = subprocess.Popen(["servod","--p1pins="+pin],stdout=subprocess.PIPE) #launch servoblaster
+	print "listening on port 3000"
 	position = "0"
 	while True:
 		try:

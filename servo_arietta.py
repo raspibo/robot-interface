@@ -29,6 +29,7 @@ if __name__ == '__main__':
 		pin1Motor = "J4.37"
 		pin2Motor = "J4.39"
 		print "Pin not properly setted <servo> <pin1motor> <pin2motor> <enable>\nDefaults servo:PWM0:34 pin1motor:PC1:37 pin2motor:PC0:39 enable:PWM1:36\n"
+	print "listening on port 3000"
 	node_script = subprocess.Popen(["nodejs","interface.js"],stdout=subprocess.PIPE) #launch nodejs
 	wheel = 0
 	accel = 0
